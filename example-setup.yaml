@@ -1,0 +1,17 @@
+
+OPENSTACK:
+  user_name: "admin"
+  tenant_name: "admin"
+  password: ""
+  auth_url: ""
+  cacert_file: "/var/vdc/certs/haproxy-ca.crt"
+  region: "RegionOne"
+
+VDC:
+  CLOS:
+    spines:  2
+    leafs:   6
+  PROTOCOLS:
+    underlay:  OSPF
+    overlay:   BGP
+    replication:  multicast
