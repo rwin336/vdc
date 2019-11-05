@@ -1,9 +1,8 @@
 
 OPENSTACK:
   user_name: "admin"
-  tenant_name: "admin"
-  password: ""
-  auth_url: ""
+  tenant_name: "vdc"
+  openrc: "/var/vdc/openrc"
   cacert_file: "/var/vdc/certs/haproxy-ca.crt"
   region: "RegionOne"
 
