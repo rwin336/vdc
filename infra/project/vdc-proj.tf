@@ -38,3 +38,4 @@ resource "openstack_identity_role_assignment_v3" "role_assignment_2" {
   role_id = "${data.openstack_identity_role_v3.admin.id}"
 }
 
+output "vdc_project_id" { value = "${openstack_identity_project_v3.vdc.id}"}

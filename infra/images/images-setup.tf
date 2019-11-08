@@ -30,3 +30,11 @@ resource "openstack_images_image_v2" "xenial" {
   disk_format = "qcow2"
   visibility = "public"
 }
+
+#resource "openstack_images_image_v2" "bionic" {
+#  name   = "Xenial16"
+#  image_source_url = "http://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img"
+#  container_format = "bare"
+#  disk_format = "qcow2"
+#  visibility = "public"
+#}
