@@ -10,14 +10,6 @@ resource "openstack_networking_router_v2" "vdc_spine1" {
   tenant_id           = "${var.vdc_project_id}"
 }
 
-
-resource "openstack_networking_router_v2" "vdc_spine2" {
-  name                = "vdc-spine2"
-  admin_state_up      = true
-  tenant_id           = "${var.vdc_project_id}"
-}
-
-
 resource "openstack_networking_router_v2" "vdc_leaf1" {
   name                = "vdc-leaf1"
   admin_state_up      = true
@@ -26,18 +18,6 @@ resource "openstack_networking_router_v2" "vdc_leaf1" {
 
 resource "openstack_networking_router_v2" "vdc_leaf2" {
   name                = "vdc-leaf2"
-  admin_state_up      = true
-  tenant_id           = "${var.vdc_project_id}"
-}
-
-resource "openstack_networking_router_v2" "vdc_leaf3" {
-  name                = "vdc-leaf3"
-  admin_state_up      = true
-  tenant_id           = "${var.vdc_project_id}"
-}
-
-resource "openstack_networking_router_v2" "vdc_leaf4" {
-  name                = "vdc-leaf4"
   admin_state_up      = true
   tenant_id           = "${var.vdc_project_id}"
 }
@@ -131,7 +111,7 @@ resource "openstack_networking_port_v2" "port_1" {
   admin_state_up = "true"
   fixed_ip {
     "subnet_id"  = "${openstack_networking_subnet_v2.subnet_l1s1.id}"
-    "ip_address" = "210.168.11.21"
+    "ip_address" = "210.168.11.1"
   }
 }
 
@@ -147,7 +127,7 @@ resource "openstack_networking_port_v2" "port_2" {
 
   fixed_ip {
     "subnet_id"  = "${openstack_networking_subnet_v2.subnet_l1s1.id}"
-    "ip_address" = "210.168.11.22"
+    "ip_address" = "210.168.11.10"
   }
 }
 
@@ -182,7 +162,7 @@ resource "openstack_networking_port_v2" "port_l2s1_1" {
   admin_state_up = "true"
   fixed_ip {
     "subnet_id"  = "${openstack_networking_subnet_v2.subnet_l2s1.id}"
-    "ip_address" = "210.168.21.21"
+    "ip_address" = "210.168.21.1"
   }
 }
 
@@ -198,7 +178,7 @@ resource "openstack_networking_port_v2" "port_l2s1_2" {
 
   fixed_ip {
     "subnet_id"  = "${openstack_networking_subnet_v2.subnet_l2s1.id}"
-    "ip_address" = "210.168.21.22"
+    "ip_address" = "210.168.21.10"
   }
 }
 
@@ -206,3 +186,5 @@ resource "openstack_networking_router_interface_v2" "router_interface_n2l2" {
   router_id = "${openstack_networking_router_v2.vdc_leaf2.id}"
   port_id  = "${openstack_networking_port_v2.port_l2s1_2.id}"
 }
+
+
