@@ -136,6 +136,109 @@ resource "openstack_networking_router_interface_v2" "router_interface_n1l1" {
   port_id  = "${openstack_networking_port_v2.port_2.id}"
 }
 
+#=====================================================
+# Network leaf1 - port1
+
+resource "openstack_networking_network_v2" "net_l1p1" {
+  name           = "net-l1p1"
+  admin_state_up = "true"
+  tenant_id      = "${var.vdc_project_id}"
+}
+
+resource "openstack_networking_subnet_v2" "subnet_l1p1" {
+  name       = "subnet_l1p1"
+  network_id = "${openstack_networking_network_v2.net_l1p1.id}"
+  cidr       = "210.168.100.0/24"
+  ip_version = 4
+  tenant_id  = "${var.vdc_project_id}"
+}
+
+resource "openstack_networking_port_v2" "port_l1p1" {
+  name           = "port_l1p1"
+  network_id     = "${openstack_networking_network_v2.net_l1p1.id}"
+  admin_state_up = "true"
+  fixed_ip {
+    "subnet_id"  = "${openstack_networking_subnet_v2.subnet_l1p1.id}"
+    "ip_address" = "210.168.100.1"
+  }
+}
+
+resource "openstack_networking_router_interface_v2" "router_interface_l1p1" {
+  router_id = "${openstack_networking_router_v2.vdc_leaf1.id}"
+  port_id  = "${openstack_networking_port_v2.port_l1p1.id}"
+}
+
+
+
+
+
+#=====================================================
+# Network leaf1 - port2
+
+resource "openstack_networking_network_v2" "net_l1p2" {
+  name           = "net-l1p2"
+  admin_state_up = "true"
+  tenant_id      = "${var.vdc_project_id}"
+}
+
+resource "openstack_networking_subnet_v2" "subnet_l1p2" {
+  name       = "subnet_l1p2"
+  network_id = "${openstack_networking_network_v2.net_l1p2.id}"
+  cidr       = "210.168.101.0/24"
+  ip_version = 4
+  tenant_id  = "${var.vdc_project_id}"
+}
+
+resource "openstack_networking_port_v2" "port_l1p2" {
+  name           = "port_l1p2"
+  network_id     = "${openstack_networking_network_v2.net_l1p2.id}"
+  admin_state_up = "true"
+  fixed_ip {
+    "subnet_id"  = "${openstack_networking_subnet_v2.subnet_l1p2.id}"
+    "ip_address" = "210.168.101.1"
+  }
+}
+
+resource "openstack_networking_router_interface_v2" "router_interface_l1p2" {
+  router_id = "${openstack_networking_router_v2.vdc_leaf1.id}"
+  port_id  = "${openstack_networking_port_v2.port_l1p2.id}"
+}
+
+
+
+#=====================================================
+# Network leaf1 - port3
+
+resource "openstack_networking_network_v2" "net_l1p3" {
+  name           = "net-l1p3"
+  admin_state_up = "true"
+  tenant_id      = "${var.vdc_project_id}"
+}
+
+resource "openstack_networking_subnet_v2" "subnet_l1p3" {
+  name       = "subnet_l1p3"
+  network_id = "${openstack_networking_network_v2.net_l1p3.id}"
+  cidr       = "210.168.102.0/24"
+  ip_version = 4
+  tenant_id  = "${var.vdc_project_id}"
+}
+
+resource "openstack_networking_port_v2" "port_l1p3" {
+  name           = "port_l1p3"
+  network_id     = "${openstack_networking_network_v2.net_l1p3.id}"
+  admin_state_up = "true"
+  fixed_ip {
+    "subnet_id"  = "${openstack_networking_subnet_v2.subnet_l1p3.id}"
+    "ip_address" = "210.168.102.1"
+  }
+}
+
+resource "openstack_networking_router_interface_v2" "router_interface_l1p3" {
+  router_id = "${openstack_networking_router_v2.vdc_leaf1.id}"
+  port_id  = "${openstack_networking_port_v2.port_l1p3.id}"
+}
+
+
 
 
 
@@ -188,3 +291,100 @@ resource "openstack_networking_router_interface_v2" "router_interface_n2l2" {
 }
 
 
+
+
+#=====================================================
+# Network leaf2 - port1
+
+resource "openstack_networking_network_v2" "net_l2p1" {
+  name           = "net-l2p1"
+  admin_state_up = "true"
+  tenant_id      = "${var.vdc_project_id}"
+}
+
+resource "openstack_networking_subnet_v2" "subnet_l2p1" {
+  name       = "subnet_l2p1"
+  network_id = "${openstack_networking_network_v2.net_l2p1.id}"
+  cidr       = "210.168.200.0/24"
+  ip_version = 4
+  tenant_id  = "${var.vdc_project_id}"
+}
+
+resource "openstack_networking_port_v2" "port_l2p1" {
+  name           = "port_l2p1"
+  network_id     = "${openstack_networking_network_v2.net_l2p1.id}"
+  admin_state_up = "true"
+  fixed_ip {
+    "subnet_id"  = "${openstack_networking_subnet_v2.subnet_l2p1.id}"
+    "ip_address" = "210.168.200.1"
+  }
+}
+
+resource "openstack_networking_router_interface_v2" "router_interface_l2p1" {
+  router_id = "${openstack_networking_router_v2.vdc_leaf2.id}"
+  port_id  = "${openstack_networking_port_v2.port_l2p1.id}"
+}
+
+#=====================================================
+# Network leaf2 - port2
+
+resource "openstack_networking_network_v2" "net_l2p2" {
+  name           = "net-l2p2"
+  admin_state_up = "true"
+  tenant_id      = "${var.vdc_project_id}"
+}
+
+resource "openstack_networking_subnet_v2" "subnet_l2p2" {
+  name       = "subnet_l2p2"
+  network_id = "${openstack_networking_network_v2.net_l2p2.id}"
+  cidr       = "210.168.201.0/24"
+  ip_version = 4
+  tenant_id  = "${var.vdc_project_id}"
+}
+
+resource "openstack_networking_port_v2" "port_l2p2" {
+  name           = "port_l2p2"
+  network_id     = "${openstack_networking_network_v2.net_l2p2.id}"
+  admin_state_up = "true"
+  fixed_ip {
+    "subnet_id"  = "${openstack_networking_subnet_v2.subnet_l2p2.id}"
+    "ip_address" = "210.168.201.1"
+  }
+}
+
+resource "openstack_networking_router_interface_v2" "router_interface_l2p2" {
+  router_id = "${openstack_networking_router_v2.vdc_leaf2.id}"
+  port_id  = "${openstack_networking_port_v2.port_l2p2.id}"
+}
+
+#=====================================================
+# Network leaf2 - port3
+
+resource "openstack_networking_network_v2" "net_l2p3" {
+  name           = "net-l2p3"
+  admin_state_up = "true"
+  tenant_id      = "${var.vdc_project_id}"
+}
+
+resource "openstack_networking_subnet_v2" "subnet_l2p3" {
+  name       = "subnet_l2p3"
+  network_id = "${openstack_networking_network_v2.net_l2p3.id}"
+  cidr       = "210.168.202.0/24"
+  ip_version = 4
+  tenant_id  = "${var.vdc_project_id}"
+}
+
+resource "openstack_networking_port_v2" "port_l2p3" {
+  name           = "port_l2p3"
+  network_id     = "${openstack_networking_network_v2.net_l2p3.id}"
+  admin_state_up = "true"
+  fixed_ip {
+    "subnet_id"  = "${openstack_networking_subnet_v2.subnet_l2p3.id}"
+    "ip_address" = "210.168.202.1"
+  }
+}
+
+resource "openstack_networking_router_interface_v2" "router_interface_l2p3" {
+  router_id = "${openstack_networking_router_v2.vdc_leaf2.id}"
+  port_id  = "${openstack_networking_port_v2.port_l2p3.id}"
+}
