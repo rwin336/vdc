@@ -1,4 +1,14 @@
 
+resource "openstack_compute_flavor_v2" "ccp_flavor" {
+  name  = "ccp-flavor"
+  ram   = "8192"
+  vcpus = "4"
+  disk  = "50"
+  is_public = "True"
+  rx_tx_factor = "1"
+}
+
+
 resource "openstack_compute_flavor_v2" "extra_tiny" {
   name  = "m1.extra_tiny"
   ram   = "256"
