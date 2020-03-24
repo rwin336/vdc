@@ -3,6 +3,33 @@ data "openstack_images_image_v2" "cirros" {
   name = "Cirros"
 }
 
+data "openstack_networking_network_v2" "ext_net" {
+  name = "ext-net"
+}
+
+resource "openstack_networking_floatingip_v2" "floating_ip_vm1" {
+  pool = "ext-net"
+}
+
+resource "openstack_networking_floatingip_v2" "floating_ip_vm2" {
+  pool = "ext-net"
+}
+
+resource "openstack_networking_floatingip_v2" "floating_ip_vm3" {
+  pool = "ext-net"
+}
+
+resource "openstack_networking_floatingip_v2" "floating_ip_vm4" {
+  pool = "ext-net"
+}
+
+resource "openstack_networking_floatingip_v2" "floating_ip_vm5" {
+  pool = "ext-net"
+}
+
+resource "openstack_networking_floatingip_v2" "floating_ip_vm6" {
+  pool = "ext-net"
+}
 
 variable "net1_id" {
   description = "The ID of net1 - output of network module"
@@ -81,17 +108,11 @@ resource "openstack_networking_port_v2" "port_vm1" {
   }
 }
 
-# Create floating ip
-#resource "openstack_networking_floatingip_v2" "vm1" {
-#  pool = var.external_network
-#}
-
 # Attach floating ip to instance
-#resource "openstack_compute_floatingip_associate_v2" "vm1" {
-#  floating_ip = openstack_networking_floatingip_v2.vm1.address
-#  instance_id = openstack_compute_instance_v2.vm1.id
-#}
-
+resource "openstack_compute_floatingip_associate_v2" "vm1_ip" {
+  floating_ip = "${openstack_networking_floatingip_v2.floating_ip_vm1.address}"
+  instance_id = "${openstack_compute_instance_v2.vm1.id}"
+}
 
 ############################################################
 #  VM2
@@ -123,6 +144,12 @@ resource "openstack_networking_port_v2" "port_vm2" {
   fixed_ip {
     subnet_id = "${var.subnet1_id}"
   }
+}
+
+# Attach floating ip to instance
+resource "openstack_compute_floatingip_associate_v2" "vm2_ip" {
+  floating_ip = "${openstack_networking_floatingip_v2.floating_ip_vm2.address}"
+  instance_id = "${openstack_compute_instance_v2.vm2.id}"
 }
 
 ############################################################
@@ -157,6 +184,11 @@ resource "openstack_networking_port_v2" "port_vm3" {
   }
 }
 
+# Attach floating ip to instance
+resource "openstack_compute_floatingip_associate_v2" "vm3_ip" {
+  floating_ip = "${openstack_networking_floatingip_v2.floating_ip_vm3.address}"
+  instance_id = "${openstack_compute_instance_v2.vm3.id}"
+}
 
 ############################################################
 #  VM4
@@ -188,6 +220,12 @@ resource "openstack_networking_port_v2" "port_vm4" {
   fixed_ip {
     subnet_id = "${var.subnet2_id}"
   }
+}
+
+# Attach floating ip to instance
+resource "openstack_compute_floatingip_associate_v2" "vm4_ip" {
+  floating_ip = "${openstack_networking_floatingip_v2.floating_ip_vm4.address}"
+  instance_id = "${openstack_compute_instance_v2.vm4.id}"
 }
 
 ############################################################
@@ -222,6 +260,11 @@ resource "openstack_networking_port_v2" "port_vm5" {
   }
 }
 
+# Attach floating ip to instance
+resource "openstack_compute_floatingip_associate_v2" "vm5_ip" {
+  floating_ip = "${openstack_networking_floatingip_v2.floating_ip_vm5.address}"
+  instance_id = "${openstack_compute_instance_v2.vm5.id}"
+}
 
 ############################################################
 #  VM6
@@ -253,4 +296,10 @@ resource "openstack_networking_port_v2" "port_vm6" {
   fixed_ip {
     subnet_id = "${var.subnet1_id}"
   }
+}
+
+# Attach floating ip to instance
+resource "openstack_compute_floatingip_associate_v2" "vm6_ip" {
+  floating_ip = "${openstack_networking_floatingip_v2.floating_ip_vm6.address}"
+  instance_id = "${openstack_compute_instance_v2.vm6.id}"
 }

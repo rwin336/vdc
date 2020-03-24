@@ -3,10 +3,15 @@ data "openstack_identity_project_v3" "vdc_project" {
   name = "vdc"
 }
 
+data "openstack_networking_network_v2" "ext_net" {
+  name = "ext-net"
+}
+
 resource "openstack_networking_router_v2" "rtr1" {
   name                = "rtr1"
   admin_state_up      = true
   tenant_id           = "${data.openstack_identity_project_v3.vdc_project.id}"
+  external_network_id = "${data.openstack_networking_network_v2.ext_net.id}"
 }
 
 #=====================================================
